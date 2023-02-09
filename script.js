@@ -24,7 +24,7 @@ class Autoservis{
     vypisAut(params) {
         let text = "";
         this.poleAuto.forEach(e => {
-            text += "zacka: "+e.auto.znacka + ", rok vydani: "+e.auto.rok_vyroby+", model: "+e.auto.model+", kilometry: "+e.auto.kilometry;
+            text += "<p>Zacka: "+ e.auto.znacka+"</p><p>Rok vydani: "+e.auto.rok_vyroby+"</p><p>Model: "+e.auto.model +"</p><p>Kilometry: "+e.auto.kilometry+"km</p>";
         });
         return text;
     }
@@ -32,11 +32,14 @@ class Autoservis{
 
 const vypisCar = document.querySelector(".vypis"); 
 const karticky = document.querySelector(".karticky")
-const submit = document.querySelector(".submitForm")
+const submit = document.querySelector(".pridat")
+const vymazat = document.querySelector(".vymazat");
 let zn;
 let mod;
 let rok;
 let kil;
+let b;
+let a;
 
 function getFormValue(){
     zn = document.querySelector(".znackaForm").value;
@@ -44,20 +47,30 @@ function getFormValue(){
     rok = document.querySelector(".rokForm").value;
     kil = document.querySelector(".kilometryForm").value;
 }
+submit.addEventListener("click", function(){
+    prirad();
+});
 
 function prirad(){
-    getFormValue();
-    let a 
+    console.log(getFormValue());
+    a = new Auto(rok,zn,mod,kil);
+    b = new Autoservis([a]);
 }
 
 function karticka(){
     let div = document.createElement('div');
     div.className = "cards";
+    div.innerHTML = b.vypisAut;
     karticky.appendChild(div);
+    vymazat.addEventListener("click",function(){
+        div.remove();
+        b.removeAuto(a);
+    });
     return div;
 }
 
 vypisCar.addEventListener("click", function(){
     karticka();
 });
+
 
