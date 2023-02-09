@@ -31,7 +31,7 @@ class Autoservis{
 }
 
 const vypisCar = document.querySelector(".vypis"); 
-const karticky = document.querySelector(".karticky")
+const kar = document.querySelector(".karticky")
 const submit = document.querySelector(".pridat")
 const vymazat = document.querySelector(".vymazat");
 let zn;
@@ -61,7 +61,7 @@ function karticka(){
     let div = document.createElement('div');
     div.className = "cards";
     div.innerHTML = b.vypisAut;
-    karticky.appendChild(div);
+    kar.appendChild(div);
     vymazat.addEventListener("click",function(){
         div.remove();
         b.removeAuto(a);
@@ -73,4 +73,12 @@ vypisCar.addEventListener("click", function(){
     karticka();
 });
 
+
+function save() {
+    localStorage.setItem(karticka, karticka.toDataURL());
+  }
+  
+  function load() {
+    
+  }
 
